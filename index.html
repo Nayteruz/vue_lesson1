@@ -61,7 +61,11 @@
 		</form>
 		<ul class="list-works" >
 			<li v-for="(item, index) in list_items"  v-bind:class="{checked: item.completed}">
-				<input type="checkbox" v-on:click="itemComplete(index)" v-model="item.completed" ><span>{{item.title}}</span><span v-on:click="itemRemove">&times;</span></li>
+				<span class="ind">{{index+1}}</span>
+				<input type="checkbox" v-on:click="itemComplete(index)" v-model="item.completed" >
+				<span>{{item.title}}</span>
+				<span v-on:click="itemRemove(index)">&times;</span>
+			</li>
 		</ul>
 	</div>
 	<script type="text/javascript">
@@ -88,8 +92,8 @@
 		  		}
 		  	},
 
-		  	itemRemove : function(e){
-		    	e.target.parentNode.remove();
+		  	itemRemove : function(index){
+		  		this.list_items.splice(index, 1);
 		    }, 
 		    
 		    itemComplete : function(index){
