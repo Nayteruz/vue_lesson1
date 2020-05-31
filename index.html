@@ -25,7 +25,7 @@
 			margin-right: 15px;
 		}
 		.line-msg {
-			width:300px;
+			width:380px;
 			margin: 0px auto 50px;	
 		}
 		span:last-child {
@@ -42,7 +42,7 @@
 		ul {
 			padding: 0;
 			margin: 0 auto;
-			width: 300px;
+			width: 380px;
 			list-style: none;	
 		}
 		ul li {
@@ -51,15 +51,20 @@
 		ul li.checked {
 			text-decoration: line-through;
 		}
+		.list-none {
+			text-align: center;
+			margin: 0 auto;
+			width: 400px;
+		}
 	</style>
 	<h1>Vue lesson 1 Список покупок в магазине</h1>
 
 	<div class="my-list" id="app_list">
 		<form class="line-msg" v-on:submit.prevent="onSubmit">
 			<input type="text" v-model="text" class="msg-input">
-			<input type="submit" class="msg-sub">
+			<input type="submit" class="msg-sub" value="Добавить покупку">
 		</form>
-		<ul class="list-works" >
+		<ul class="list-works" v-if="list_items.length">
 			<li v-for="(item, index) in list_items"  v-bind:class="{checked: item.completed}">
 				<span class="ind">{{index+1}}</span>
 				<input type="checkbox" v-on:click="itemComplete(index)" v-model="item.completed" >
@@ -67,6 +72,7 @@
 				<span v-on:click="itemRemove(index)">&times;</span>
 			</li>
 		</ul>
+		<div v-else class="list-none">Список покупок пуст</div>	
 	</div>
 	<script type="text/javascript">
 		var app_l1 = new Vue({
